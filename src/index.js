@@ -28,14 +28,14 @@ async function onSearchBtnClick(e) {
       Notiflix.Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.',
       );
-      clearCardsCounteiner();
+      cleanCardContainer();
       if (!refs.moreBtn.hasAttribute('is-hidden')) {
         refs.moreBtn.classList.add('is-hidden');
       }
     } else {
-      clearCardsCounteiner();
+      cleanCardContainer();
       Notiflix.Notify.info(`"Hooray! We found ${apiAnswer.totalHits} images."`);
-      appendCardsMarkup(apiAnswer.hits);
+      appendCardMarkup(apiAnswer.hits);
       refs.moreBtn.classList.remove('is-hidden');
     }
   } catch (error) {
@@ -50,7 +50,7 @@ async function onLoadMoreBtnClick() {
     console.log(refs.gallery.querySelectorAll('.photo-card').length);
     // if (!(refs.gallery.querySelectorAll('.photo-card').length === apiAnswer.totalHits)) {
     if (!(refs.gallery.querySelectorAll('.photo-card').length === apiAnswer.totalHits)) {
-      appendCardsMarkup(apiAnswer.hits);
+      appendCardMarkup(apiAnswer.hits);
     } else {
       Notiflix.Notify.failure('We are sorry, but you have reached the end of search results.');
       refs.moreBtn.classList.add('is-hidden');
@@ -60,10 +60,10 @@ async function onLoadMoreBtnClick() {
   }
 }
 
-function appendCardsMarkup(ev) {
+function appendCardMarkup(ev) {
   refs.gallery.insertAdjacentHTML('beforeend', resultCard(ev));
 }
 
-function clearCardsCounteiner() {
+function cleanCardContainer() {
   refs.gallery.innerHTML = '';
 }
