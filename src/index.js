@@ -28,6 +28,7 @@ async function onSearchBtnClick(e) {
         'Sorry, there are no images matching your search query. Please try again.',
       );
       cleanCardContainer();
+
       if (!refs.moreBtn.hasAttribute('is-hidden')) {
         refs.moreBtn.classList.add('is-hidden');
       }
