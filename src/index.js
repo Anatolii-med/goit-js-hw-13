@@ -48,12 +48,17 @@ async function onLoadMoreBtnClick() {
   try {
     console.log(apiAnswer.totalHits);
     console.log(refs.gallery.querySelectorAll('.photo-card').length);
+    console.log(newsApiService.perPage);
+
     // if (!(refs.gallery.querySelectorAll('.photo-card').length === apiAnswer.totalHits)) {
-    if (!(refs.gallery.querySelectorAll('.photo-card').length === apiAnswer.totalHits)) {
-      appendCardMarkup(apiAnswer.hits);
-    } else {
+    if (
+      apiAnswer.totalHits - refs.gallery.querySelectorAll('.photo-card').length <=
+      newsApiService.perPage
+    ) {
       Notiflix.Notify.failure('We are sorry, but you have reached the end of search results.');
       refs.moreBtn.classList.add('is-hidden');
+    } else {
+      appendCardMarkup(apiAnswer.hits);
     }
   } catch (error) {
     console.log(error);
