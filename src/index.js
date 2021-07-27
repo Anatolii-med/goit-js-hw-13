@@ -15,6 +15,8 @@ const newsApiService = new NewsApiService();
 refs.inputForm.addEventListener('submit', onSearchBtnClick);
 refs.moreBtn.addEventListener('click', onLoadMoreBtnClick);
 
+let numberImages = 0;
+
 async function onSearchBtnClick(e) {
   e.preventDefault();
   newsApiService.resetPage();
@@ -22,6 +24,7 @@ async function onSearchBtnClick(e) {
 
   try {
     const apiAnswer = await newsApiService.fetchArticles();
+    numberImages = apiAnswer.hits.length;
 
     if (newsApiService.query.trim() === '') {
       Notiflix.Notify.failure(
@@ -46,15 +49,9 @@ async function onSearchBtnClick(e) {
 async function onLoadMoreBtnClick() {
   const apiAnswer = await newsApiService.fetchArticles();
   try {
-    console.log(apiAnswer.totalHits);
-    console.log(refs.gallery.querySelectorAll('.photo-card').length);
-    console.log(newsApiService.perPage);
+    numberImages += apiAnswer.hits.length;
 
-    // if (!(refs.gallery.querySelectorAll('.photo-card').length === apiAnswer.totalHits)) {
-    if (
-      apiAnswer.totalHits - refs.gallery.querySelectorAll('.photo-card').length <=
-      newsApiService.perPage
-    ) {
+    if (numberImages >= apiAnswer.totalHits) {
       Notiflix.Notify.failure('We are sorry, but you have reached the end of search results.');
       refs.moreBtn.classList.add('is-hidden');
     } else {
