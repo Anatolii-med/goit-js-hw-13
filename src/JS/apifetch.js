@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-class NewsApiService {
+export default class NewsApiService {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
@@ -27,5 +27,3 @@ class NewsApiService {
     this.searchQuery = newQuery;
   }
 }
-
-export default NewsApiService;

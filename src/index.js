@@ -1,8 +1,7 @@
 import './sass/main.scss';
 import resultCard from './templates/resultCard.hbs';
-import NewsApiService from './js/api-fetch';
+import NewsApiService from './js/apifetch';
 import Notiflix from 'notiflix';
-import axios from 'axios';
 
 const refs = {
   inputForm: document.querySelector('.search-form'),
