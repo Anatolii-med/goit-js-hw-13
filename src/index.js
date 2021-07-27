@@ -1,7 +1,7 @@
 import './sass/main.scss';
 import resultCard from './templates/resultCard.hbs';
 import NewsApiService from './js/api-fetch';
-import Notiflix, { Loading } from 'notiflix';
+import Notiflix from 'notiflix';
 import axios from 'axios';
 
 const refs = {
