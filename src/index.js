@@ -1,6 +1,6 @@
 import './sass/main.scss';
 import resultCard from './templates/resultCard.hbs';
-import NewsApiService from './js/apifetch';
+import NewsApiService from './JS/apifetch';
 import Notiflix from 'notiflix';
 
 const refs = {
