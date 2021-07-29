@@ -1,7 +1,9 @@
 import './sass/main.scss';
+import 'simplelightbox/dist/simple-lightbox.css';
 import resultCard from './templates/resultCard.hbs';
 import NewsApiService from './JS/apifetch';
 import Notiflix from 'notiflix';
+import SimpleLightbox from 'simplelightbox';
 
 const refs = {
   inputForm: document.querySelector('.search-form'),
@@ -16,6 +18,7 @@ refs.inputForm.addEventListener('submit', onSearchBtnClick);
 refs.moreBtn.addEventListener('click', onLoadMoreBtnClick);
 
 let numberImages = 0;
+let lightbox = new SimpleLightbox('.gallery a');
 
 async function onSearchBtnClick(e) {
   e.preventDefault();
@@ -39,6 +42,7 @@ async function onSearchBtnClick(e) {
       cleanCardContainer();
       Notiflix.Notify.info(`"Hooray! We found ${apiAnswer.totalHits} images."`);
       appendCardMarkup(apiAnswer.hits);
+      lightbox.refresh();
       refs.moreBtn.classList.remove('is-hidden');
     }
   } catch (error) {
@@ -56,6 +60,7 @@ async function onLoadMoreBtnClick() {
       refs.moreBtn.classList.add('is-hidden');
     } else {
       appendCardMarkup(apiAnswer.hits);
+      lightbox.refresh();
     }
   } catch (error) {
     console.log(error);
